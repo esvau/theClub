@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Kegelclub" representedClassName="Kegelclub" syncable="YES">
+        <attribute name="clubLogo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="gruendungsDatum" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="kegelbahn" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mailingList" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="slogan" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="kassenwart" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegler" inverseName="isKassenwartOf" inverseEntity="Kegler" syncable="YES"/>
+        <relationship name="kegelTermine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegeltermin" inverseName="termineOfClub" inverseEntity="Kegeltermin" syncable="YES"/>
+        <relationship name="praesident" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegler" inverseName="isPresidentOf" inverseEntity="Kegler" syncable="YES"/>
+        <relationship name="statuten" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Statue" inverseName="statuteOfKegelclub" inverseEntity="Statue" syncable="YES"/>
+        <relationship name="strafenKatalog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Strafe" inverseName="strafenKatalog" inverseEntity="Strafe" syncable="YES"/>
+    </entity>
+    <entity name="Kegelliga" representedClassName="Kegelliga" syncable="YES">
+        <attribute name="beginn" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="ende" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="ligaNr" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="saison" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="hasKegler" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegler" inverseName="isInKegelliga" inverseEntity="Kegler" syncable="YES"/>
+    </entity>
+    <entity name="Kegeltermin" representedClassName="Kegeltermin" syncable="YES">
+        <attribute name="datum" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="durchschnittsStrafen" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="ende" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="gesamtStrafen" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="ort" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="strafen" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Strafe" inverseName="strafenKegeltermin" inverseEntity="Strafe" syncable="YES"/>
+        <relationship name="teilnehmer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegler" inverseName="isAnwesend" inverseEntity="Kegler" syncable="YES"/>
+        <relationship name="termineOfClub" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegelclub" inverseName="kegelTermine" inverseEntity="Kegelclub" syncable="YES"/>
+    </entity>
+    <entity name="Kegler" representedClassName="Kegler" syncable="YES">
+        <attribute name="adresse" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="alter" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="anwesenheit" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="eintritt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="foto" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="gastkegler" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="geburtstag" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vorname" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="isAnwesend" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegeltermin" inverseName="teilnehmer" inverseEntity="Kegeltermin" syncable="YES"/>
+        <relationship name="isGastMannschaft" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Spiel" inverseName="gast" inverseEntity="Spiel" syncable="YES"/>
+        <relationship name="isHeimMannschaft" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Spiel" inverseName="heim" inverseEntity="Spiel" syncable="YES"/>
+        <relationship name="isInKegelliga" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegelliga" inverseName="hasKegler" inverseEntity="Kegelliga" syncable="YES"/>
+        <relationship name="isKassenwartOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegelclub" inverseName="kassenwart" inverseEntity="Kegelclub" syncable="YES"/>
+        <relationship name="isPresidentOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegelclub" inverseName="praesident" inverseEntity="Kegelclub" syncable="YES"/>
+        <relationship name="strafen" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Strafe" inverseName="strafen" inverseEntity="Strafe" syncable="YES"/>
+    </entity>
+    <entity name="Spiel" representedClassName="Spiel" syncable="YES">
+        <attribute name="datum" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="spielId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="spieltag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="toreGast" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="toreHeim" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="gast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegler" inverseName="isGastMannschaft" inverseEntity="Kegler" syncable="YES"/>
+        <relationship name="heim" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegler" inverseName="isHeimMannschaft" inverseEntity="Kegler" syncable="YES"/>
+    </entity>
+    <entity name="Statue" representedClassName="Statue" syncable="YES">
+        <attribute name="paragraph" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statueId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="statutenText" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="statuteOfKegelclub" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegelclub" inverseName="statuten" inverseEntity="Kegelclub" syncable="YES"/>
+    </entity>
+    <entity name="Strafe" representedClassName="Strafe" syncable="YES">
+        <attribute name="betrag" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="bezeichnung" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="erklaerung" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zeitpunkt" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="strafen" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegler" inverseName="strafen" inverseEntity="Kegler" syncable="YES"/>
+        <relationship name="strafenKatalog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegelclub" inverseName="strafenKatalog" inverseEntity="Kegelclub" syncable="YES"/>
+        <relationship name="strafenKegeltermin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kegeltermin" inverseName="strafen" inverseEntity="Kegeltermin" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Kegelclub" positionX="-63" positionY="-18" width="128" height="208"/>
+        <element name="Kegelliga" positionX="0" positionY="108" width="128" height="118"/>
+        <element name="Kegeltermin" positionX="-36" positionY="81" width="128" height="178"/>
+        <element name="Kegler" positionX="-54" positionY="18" width="128" height="298"/>
+        <element name="Spiel" positionX="18" positionY="144" width="128" height="148"/>
+        <element name="Statue" positionX="27" positionY="180" width="128" height="103"/>
+        <element name="Strafe" positionX="-18" positionY="99" width="128" height="148"/>
+    </elements>
+</model>
